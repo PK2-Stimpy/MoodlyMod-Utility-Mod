@@ -8,6 +8,7 @@ import us.np.moodlymod.module.modules.misc.AutoRacismModule;
 import us.np.moodlymod.module.modules.misc.DiscordRPCModule;
 import us.np.moodlymod.module.modules.movement.ElytraFlyModule;
 import us.np.moodlymod.module.modules.movement.Sprint;
+import us.np.moodlymod.module.modules.render.FullbrightModule;
 import us.np.moodlymod.module.modules.render.MobOwnerModule;
 import us.np.moodlymod.module.modules.ui.ClickGuiModule;
 import us.np.moodlymod.module.modules.ui.HUDModule;
@@ -33,6 +34,7 @@ public class ModuleManager {
         modules.add(new Sprint());
         /* Render */
         /* modules.add(new XRay()); */
+        modules.add(new FullbrightModule());
         modules.add(new MobOwnerModule());
         /* Misc */
         modules.add(new AntiAFKModule());
