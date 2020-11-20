@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.7.10",
+  "package": "us.np.moodlymod.mixin.client",
+  "refmap": "mixins.moodlymod.refmap.json",
+  "target": "@env(DEFAULT)",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinMinecraftServer",
+    "MixinNetworkManager",
+    "MixinEntityPlayerSP",
+    "MixinWorld",
+    "MixinEntity",
+    "MixinEntityLivingBase",
+    "MixinEntityPlayer"
+  ]
+}

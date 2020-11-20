@@ -1,0 +1,11 @@
+[
+    {
+      "modid": "MoodlyMod",
+      "name": "MoodlyMod",
+      "description": "Big peeveepee client :Sunglasses:",
+      "version": "${modVersion}",
+      "mcversion": "${version_minecraft}",
+      "url": "",
+      "updateUrl": "",
+      "authorList": ["PK2_Stimpy", "NorkenBot"],
+    }
