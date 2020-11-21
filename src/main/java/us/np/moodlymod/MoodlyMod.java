@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.lwjgl.opengl.Display;
 import us.np.moodlymod.command.CommandManager;
+import us.np.moodlymod.event.CEventProcessor;
 import us.np.moodlymod.event.EventProcessor;
 import us.np.moodlymod.module.Module;
 import us.np.moodlymod.module.ModuleManager;
@@ -68,12 +69,16 @@ public class MoodlyMod {
         EventProcessor eventProcessor = new EventProcessor();
         MinecraftForge.EVENT_BUS.register(eventProcessor);
         FMLCommonHandler.instance().bus().register(eventProcessor);
+
+        EVENT_BUS.subscribe(new CEventProcessor());
     }
 
     @EventHandler
     public void stopping(FMLServerStoppingEvent event) {
+        /*
         MoodlyMod.saveAllModules();
         friendsUtil.save();
+         */
     }
 
     public static void saveAllModules() {

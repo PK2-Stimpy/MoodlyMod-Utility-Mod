@@ -1,5 +1,7 @@
 package us.np.moodlymod.module.modules.combat;
 
+import static us.np.moodlymod.MoodlyMod.debug;
+
 import me.zero.alpine.fork.listener.EventHandler;
 import me.zero.alpine.fork.listener.Listener;
 import net.minecraft.client.renderer.GlStateManager;
@@ -49,6 +51,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
 
+
+/**
+ * @apiNote Checks: 'NetworkPacketEvent', 'PlayerMotionUpdateEvent', 'EntityRemovedEvent'
+ * @apiNote 'TickEvent.PlayerTickEvent', 'RenderEvent'.
+ *
+ * */
 public class AutoCrystalModule extends Module {
     public static final OptionBetterMode breakMode = new OptionBetterMode("BreakMode", 1, BetterMode.construct("Always", "Smart", "OnlyOwn"));
     public static final OptionBetterMode placeMode = new OptionBetterMode("PlaceMode", 0, BetterMode.construct("Most", "Lethal"));
@@ -124,7 +132,6 @@ public class AutoCrystalModule extends Module {
 
     @EventHandler
     private Listener<EntityRemovedEvent> entityRemovedEventListener = new Listener<>(event -> {
-        if(mc.player == null) return;
         if(event.getEntity() instanceof EntityEnderCrystal)
             _attackedEnderCrystals.remove((EntityEnderCrystal)event.getEntity());
     });
@@ -178,7 +185,6 @@ public class AutoCrystalModule extends Module {
 
     @EventHandler
     private Listener<TickEvent.PlayerTickEvent> playerTickEventListener = new Listener<>(event -> {
-        if(mc.player == null) return;
         if (_removeVisualTimer.passed(1000)) {
             _removeVisualTimer.reset();
             if (!_placedCrystals.isEmpty()) {
@@ -359,7 +365,6 @@ public class AutoCrystalModule extends Module {
 
     @EventHandler
     private Listener<PlayerMotionUpdateEvent> playerMotionUpdateEventListener = new Listener<>(event -> {
-        if(mc.player == null) return;
         if(event.getEra() != CustomEvent.Era.PRE) return;
         if(event.isCancelled()) {
             _rotations = null;
@@ -379,7 +384,6 @@ public class AutoCrystalModule extends Module {
 
     @EventHandler
     private Listener<NetworkPacketEvent> networkPacketEventListener = new Listener<>(event -> {
-        if(mc.player == null) return;
         if (event.getPacket() instanceof SPacketSoundEffect) {
             SPacketSoundEffect packet = (SPacketSoundEffect) event.getPacket();
             if (mc.world == null) return;

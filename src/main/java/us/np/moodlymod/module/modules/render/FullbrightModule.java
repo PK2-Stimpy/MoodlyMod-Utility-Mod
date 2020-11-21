@@ -17,8 +17,8 @@ import us.np.moodlymod.module.option.OptionBoolean;
 import java.awt.*;
 
 public class FullbrightModule extends Module {
-    public static OptionBetterMode mode = new OptionBetterMode("Mode", 0, BetterMode.construct("GAMMA", "POTION"));
-    public static OptionBoolean effects = new OptionBoolean("Effects", false);
+    public static final OptionBetterMode mode = new OptionBetterMode("Mode", 0, BetterMode.construct("GAMMA", "POTION"));
+    public static final OptionBoolean effects = new OptionBoolean("Effects", false);
 
     private float previousSetting;
 

@@ -22,6 +22,7 @@ import us.np.moodlymod.MoodlyMod;
 import us.np.moodlymod.command.CommandManager;
 import us.np.moodlymod.command.CommandReturnStatus;
 import us.np.moodlymod.event.custom.entityplayer.PlayerDisconnectEvent;
+import us.np.moodlymod.event.custom.render.RenderEvent;
 import us.np.moodlymod.module.Module;
 
 public class EventProcessor {
@@ -36,7 +37,7 @@ public class EventProcessor {
         GlStateManager.disableDepth();
 
         GlStateManager.glLineWidth(1f);
-
+        EVENT_BUS.post(new RenderEvent(event.getPartialTicks()));
         GlStateManager.glLineWidth(1f);
 
         GlStateManager.shadeModel(GL11.GL_FLAT);
@@ -78,7 +79,8 @@ public class EventProcessor {
     @SubscribeEvent public void onRenderGameOverlayTextEvent(RenderGameOverlayEvent.Text event) { EVENT_BUS.post(event); }
     @SubscribeEvent public void onRenderWorldLast(RenderWorldLastEvent event) { EVENT_BUS.post(event); }
     @SubscribeEvent public void onPlace(BlockEvent.PlaceEvent event) { EVENT_BUS.post(event); }
-    @SubscribeEvent public void onPlayerLogOut(PlayerEvent.PlayerLoggedOutEvent event) { EVENT_BUS.post(new PlayerDisconnectEvent()); }
-    @SubscribeEvent public void onQuitClientServer(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) { EVENT_BUS.post(event); }
-    @SubscribeEvent public void onJoinServerClient(FMLNetworkEvent.ServerDisconnectionFromClientEvent event) { EVENT_BUS.post(event); }
+    @SubscribeEvent public void onPlayerLogOut(PlayerEvent.PlayerLoggedOutEvent event) { EVENT_BUS.post(event); }
+    @SubscribeEvent public void onQuitClientServer(FMLNetworkEvent.ClientDisconnectionFromServerEvent event) { EVENT_BUS.post(event); EVENT_BUS.post(new PlayerDisconnectEvent());}
+    @SubscribeEvent public void onQuitServerClient(FMLNetworkEvent.ServerDisconnectionFromClientEvent event) { EVENT_BUS.post(event); EVENT_BUS.post(new PlayerDisconnectEvent());}
+    @SubscribeEvent public void onPlayerTick(TickEvent.PlayerTickEvent event) { EVENT_BUS.post(event); }
 }
