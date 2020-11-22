@@ -35,8 +35,8 @@ public class DiscordRPCModule extends Module {
         else if(showDevelopers.getValue()) presence[0] = "Developed";
         else if(showPlayerInfo.getValue()) presence[0] = "Player Info";
         /* State */
-        if(showDefault.getValue()) presence[1] = "n14jk2bnrkjf1nhuiq1gq";
-        if(showDevelopers.getValue()) presence[1] = "by NorkenBot and PK2_Stimpy";
+        if(showDefault.getValue()) presence[1] = "Client For Anarchy";
+        if(showDevelopers.getValue()) presence[1] = "by CGrego3211 and PK2_Stimpy";
         else if(showPlayerInfo.getValue())
             if(DiscordRPCModule.mc.player != null)
                 presence[1] = "My health is " + Wrapper.getMC().player.getHealth();
