@@ -1,7 +1,7 @@
 package us.np.moodlymod.module;
 
 import us.np.moodlymod.module.modules.combat.AutoCrystalModule;
-import us.np.moodlymod.module.modules.combat.AutoTotem;
+import us.np.moodlymod.module.modules.combat.AutoTotemModule;
 import us.np.moodlymod.module.modules.exploit.AntiHungerModule;
 import us.np.moodlymod.module.modules.misc.AntiAFKModule;
 import us.np.moodlymod.module.modules.misc.AutoRacismModule;
@@ -25,7 +25,7 @@ public class ModuleManager {
 
     public void setModules() {
         /* Combat */
-        modules.add(new AutoTotem());
+        modules.add(new AutoTotemModule());
         modules.add(new AutoCrystalModule());
         /* Exploit */
         modules.add(new AntiHungerModule());

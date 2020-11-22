@@ -8,8 +8,8 @@ import net.minecraft.network.play.client.CPacketChatMessage;
 
 import java.awt.*;
 
-public class AutoTotem extends Module {
-    public AutoTotem() {
+public class AutoTotemModule extends Module {
+    public AutoTotemModule() {
         super("AutoTotem", new String[] {""}, "NONE", Color.BLUE, ModuleType.COMBAT);
         endOption();
     }
