@@ -2,27 +2,33 @@ package us.np.moodlymod.util;
 
 import static org.lwjgl.opengl.GL11.*;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 import us.np.moodlymod.Wrapper;
 
 import java.awt.*;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.LinkedList;
 import java.util.Locale;
+import java.util.Objects;
 
 public class RenderUtils {
+    public static final Minecraft mc = Minecraft.getMinecraft();
+
+    /* Old Stuff*/
     public static void drawBoundingBox(AxisAlignedBB bb, float width, float red, float green, float blue, float alpha)
     {
         GlStateManager.pushMatrix();

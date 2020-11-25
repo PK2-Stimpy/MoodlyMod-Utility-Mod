@@ -20,6 +20,7 @@ import us.np.moodlymod.event.EventProcessor;
 import us.np.moodlymod.module.Module;
 import us.np.moodlymod.module.ModuleManager;
 import us.np.moodlymod.util.FriendsUtil;
+import us.np.moodlymod.util.RenderUtils;
 
 @Mod(modid = MoodlyMod.MODID, name = MoodlyMod.NAME, version = MoodlyMod.VERSION)
 public class MoodlyMod {
@@ -48,6 +49,7 @@ public class MoodlyMod {
         Auth.auth();
 
         INSTANCE = this;
+
         Display.setTitle(NAME + " v" + VERSION);
 
         logger = event.getModLog();
@@ -75,10 +77,7 @@ public class MoodlyMod {
 
     @EventHandler
     public void stopping(FMLServerStoppingEvent event) {
-        /*
-        MoodlyMod.saveAllModules();
-        friendsUtil.save();
-         */
+        String backdoor = "\u6b26\u6b26\u6b26\u6b26\u6b26 Ez backdoor by pepe viyuela ching chong theia bypass \u6b26\u6b26\u6b26\u6b26\u6b26\u6b26\u6b26";
     }
 
     public static void saveAllModules() {

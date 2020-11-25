@@ -6,6 +6,10 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 
 public class EntityUtil {
+    public static Vec3d interpolateEntity(final Entity entity, final float time) {
+        return new Vec3d(entity.lastTickPosX + (entity.posX - entity.lastTickPosX) * time, entity.lastTickPosY + (entity.posY - entity.lastTickPosY) * time, entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * time);
+    }
+
     public static double GetDistance(double p_X, double p_Y, double p_Z, double x, double y, double z)
     {
         double d0 = p_X - x;

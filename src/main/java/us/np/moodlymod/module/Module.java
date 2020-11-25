@@ -140,7 +140,7 @@ public class Module implements Listenable {
         setEnabled(!enabled);
         if(enabled) onEnable(); else onDisable();
 
-        if(save) save();
+        // if(save) save();
     }
 
     public void setAlias(String[] alias) {this.alias = alias;}

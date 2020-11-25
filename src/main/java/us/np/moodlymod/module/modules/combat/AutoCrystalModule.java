@@ -79,6 +79,10 @@ public class AutoCrystalModule extends Module {
     public static final OptionDouble green = new OptionDouble("Green", 255D, 0D, 255D);
     public static final OptionDouble blue = new OptionDouble("Blue", 243D, 0D, 255D);
     public static final OptionDouble alpha = new OptionDouble("Alpha", 153D, 0D, 255D);
+    /* CrystalRender */
+    public static final OptionBoolean crystalRender = new OptionBoolean("CrystalRender", true);
+    public static final OptionDouble crystalHeight = new OptionDouble("CrystalHeight", 3D, 1D, 12D);
+    public static final OptionDouble cAlpha = new OptionDouble("CrystalAlpha", 50D, 0D, 255D);
 
     public AutoCrystalModule() {
         super("AutoCrystal", null, "NONE", Color.RED, ModuleType.COMBAT);
@@ -99,11 +103,16 @@ public class AutoCrystalModule extends Module {
         addOption(pauseWhileEating);
         addOption(noSuicide);
         addOption(antiWeakness);
+        /* Block Render */
         addOption(render);
         addOption(red);
         addOption(green);
         addOption(blue);
         addOption(alpha);
+        /* Top Render */
+        addOption(crystalRender);
+        addOption(crystalHeight);
+        addOption(cAlpha);
         endOption();
     }
 
@@ -162,7 +171,23 @@ public class AutoCrystalModule extends Module {
         return true;
     }
 
-    public EntityEnderCrystal getNearestCrystalTo(Entity entity) { if(mc.player == null) return null; return mc.world.getLoadedEntityList().stream().filter(e -> e instanceof EntityEnderCrystal && validateCrystal((EntityEnderCrystal)e)).map(e -> (EntityEnderCrystal)e).min(Comparator.comparing(e -> entity.getDistance(e))).orElse(null); }
+    public EntityEnderCrystal getNearestCrystalTo(Entity entity) {
+        EntityEnderCrystal enderCrystal = null;
+        float lastCrystalDistance = 100f;
+
+        List<Entity> list = Wrapper.getMC().world.getLoadedEntityList();
+        for(int i = 0; i < list.size(); i++) {
+            Entity crystal = list.get(i);
+            if(crystal instanceof EntityEnderCrystal && validateCrystal((EntityEnderCrystal) crystal)) /* Valid crystal. */ {
+                float currentDistance = entity.getDistance(crystal);
+                if(currentDistance < lastCrystalDistance) {
+                    enderCrystal = (EntityEnderCrystal)crystal;
+                    lastCrystalDistance = currentDistance;
+                }
+            }
+        }
+        return enderCrystal;
+    }
     public void addAttackedCrystal(EntityEnderCrystal enderCrystal) {
         if(mc.player == null) return;
         if(_attackedEnderCrystals.contains(enderCrystal)) {
@@ -222,8 +247,7 @@ public class AutoCrystalModule extends Module {
 
         ArrayList<BlockPos> placeLocations = new ArrayList<BlockPos>();
         EntityPlayer playerTarget = null;
-        if (!skipUpdateBlocks && _remainingTicks <= 0)
-        {
+        if (!skipUpdateBlocks && _remainingTicks <= 0) {
             _remainingTicks = ticks.getValue().intValue();
             final List<BlockPos> cachedCrystalBlocks = CrystalUtils.findCrystalBlocks(mc.player, placeRadius.getValue().floatValue()).stream().filter(pos -> verifyCrystalBlocks(pos)).collect(Collectors.toList());
             if (!cachedCrystalBlocks.isEmpty()) {
@@ -266,7 +290,7 @@ public class AutoCrystalModule extends Module {
             }
         }
 
-        EntityEnderCrystal crystal = getNearestCrystalTo(mc.player);
+        EntityEnderCrystal crystal = getNearestCrystalTo(Wrapper.getMC().player);
         boolean isValidCrystal = crystal != null ? mc.player.getDistance(crystal) < breakRadius.getValue() : false;
         if (!isValidCrystal && placeLocations.isEmpty() && !skipUpdateBlocks) {
             _remainingTicks = 0;
@@ -406,11 +430,20 @@ public class AutoCrystalModule extends Module {
 
         _placedCrystals.forEach(pos ->
         {
-            final AxisAlignedBB bb = new AxisAlignedBB(pos.getX() - mc.getRenderManager().viewerPosX,
-                    pos.getY() - mc.getRenderManager().viewerPosY, pos.getZ() - mc.getRenderManager().viewerPosZ,
+            final AxisAlignedBB bb = new AxisAlignedBB(
+                    pos.getX() - mc.getRenderManager().viewerPosX,
+                    pos.getY() - mc.getRenderManager().viewerPosY,
+                    pos.getZ() - mc.getRenderManager().viewerPosZ,
                     pos.getX() + 1 - mc.getRenderManager().viewerPosX,
                     pos.getY() + (1) - mc.getRenderManager().viewerPosY,
                     pos.getZ() + 1 - mc.getRenderManager().viewerPosZ);
+            final AxisAlignedBB topBB = new AxisAlignedBB(
+                    (pos.getX() - mc.getRenderManager().viewerPosX),
+                    (pos.getY() - mc.getRenderManager().viewerPosY) + 1,
+                    (pos.getZ() - mc.getRenderManager().viewerPosZ),
+                    (pos.getX() - mc.getRenderManager().viewerPosX) + 1,
+                    (pos.getY() - mc.getRenderManager().viewerPosY) + (crystalHeight.getValue().intValue() + 1),
+                    (pos.getZ() - mc.getRenderManager().viewerPosZ) + 1);
 
             camera.setPosition(mc.getRenderViewEntity().posX, mc.getRenderViewEntity().posY,
                     mc.getRenderViewEntity().posZ);
@@ -431,9 +464,17 @@ public class AutoCrystalModule extends Module {
                 GL11.glLineWidth(1.5f);
 
                 int color = (alpha.getValue().intValue() << 24) | (red.getValue().intValue() << 16) | (green.getValue().intValue() << 8) | blue.getValue().intValue();
+                int colorTop = (cAlpha.getValue().intValue() << 24) | (red.getValue().intValue() << 16) | (green.getValue().intValue() << 8) | blue.getValue().intValue();
 
+                /* Block Highlight */
                 RenderUtils.drawBoundingBox(bb, 1.0f, color);
                 RenderUtils.drawFilledBox(bb, color);
+                /* Top Highlight */
+                if(crystalRender.getValue()) {
+                    RenderUtils.drawBoundingBox(topBB, 1.0f, colorTop);
+                    RenderUtils.drawFilledBox(topBB, colorTop);
+                }
+
                 GL11.glDisable(GL11.GL_LINE_SMOOTH);
                 GlStateManager.depthMask(true);
                 GlStateManager.enableDepth();
