@@ -1,13 +1,13 @@
 package us.np.moodlymod.module;
 
 import us.np.moodlymod.module.modules.combat.AutoCrystalModule;
-import us.np.moodlymod.module.modules.combat.AutoTotem;
+import us.np.moodlymod.module.modules.combat.AutoTotemModule;
 import us.np.moodlymod.module.modules.exploit.AntiHungerModule;
 import us.np.moodlymod.module.modules.misc.AntiAFKModule;
 import us.np.moodlymod.module.modules.misc.AutoRacismModule;
 import us.np.moodlymod.module.modules.misc.DiscordRPCModule;
 import us.np.moodlymod.module.modules.movement.ElytraFlyModule;
-import us.np.moodlymod.module.modules.movement.Sprint;
+import us.np.moodlymod.module.modules.movement.SprintModule;
 import us.np.moodlymod.module.modules.render.FullbrightModule;
 import us.np.moodlymod.module.modules.render.MobOwnerModule;
 import us.np.moodlymod.module.modules.render.PortalESPModule;
@@ -26,13 +26,13 @@ public class ModuleManager {
 
     public void setModules() {
         /* Combat */
-        modules.add(new AutoTotem());
+        modules.add(new AutoTotemModule());
         modules.add(new AutoCrystalModule());
         /* Exploit */
         modules.add(new AntiHungerModule());
         /* Movement */
         modules.add(new ElytraFlyModule());
-        modules.add(new Sprint());
+        modules.add(new SprintModule());
         /* Render */
         /* modules.add(new XRay()); */
         modules.add(new FullbrightModule());
