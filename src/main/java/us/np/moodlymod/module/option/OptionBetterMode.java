@@ -11,11 +11,11 @@ public class OptionBetterMode extends Option<BetterMode> {
     }
 
     public String getDisplayName() { return modes[i].mode; }
-    public String nextMode() { if(++i == modes.length) i = 0; return modes[i].mode; }
+    public String nextMode() { i++; if(i == modes.length) i = 0; return getDisplayName(); }
     public String setMode(int i) {
-        if(i >= modes.length) i = 0;
-        this.i = 0;
-        return modes[i].mode;
+        this.i = i;
+        if(i >= modes.length) this.i = 0;
+        return modes[this.i].mode;
     }
     public int getMode() { return i; }
     public BetterMode[] getModes() { return modes; }
