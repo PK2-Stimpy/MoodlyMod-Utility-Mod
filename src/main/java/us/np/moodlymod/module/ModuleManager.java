@@ -6,11 +6,13 @@ import us.np.moodlymod.module.modules.exploit.AntiHungerModule;
 import us.np.moodlymod.module.modules.misc.AntiAFKModule;
 import us.np.moodlymod.module.modules.misc.AutoRacismModule;
 import us.np.moodlymod.module.modules.misc.DiscordRPCModule;
+import us.np.moodlymod.module.modules.misc.NoVoidModule;
 import us.np.moodlymod.module.modules.movement.ElytraFlyModule;
 import us.np.moodlymod.module.modules.movement.SprintModule;
 import us.np.moodlymod.module.modules.render.FullbrightModule;
 import us.np.moodlymod.module.modules.render.MobOwnerModule;
 import us.np.moodlymod.module.modules.render.PortalESPModule;
+import us.np.moodlymod.module.modules.render.VoidESPModule;
 import us.np.moodlymod.module.modules.ui.ClickGuiModule;
 import us.np.moodlymod.module.modules.ui.HUDModule;
 import us.np.moodlymod.module.modules.world.DonkeyLoggerModule;
@@ -38,10 +40,12 @@ public class ModuleManager {
         modules.add(new FullbrightModule());
         modules.add(new MobOwnerModule());
         modules.add(new PortalESPModule());
+        modules.add(new VoidESPModule());
         /* Misc */
         modules.add(new AntiAFKModule());
         modules.add(new AutoRacismModule());
         modules.add(new DiscordRPCModule());
+        modules.add(new NoVoidModule());
         /* World */
         modules.add(new DonkeyLoggerModule());
         /* UI */
