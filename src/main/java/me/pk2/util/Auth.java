@@ -32,7 +32,11 @@ public class Auth {
             configUtils.save();
         }
         try {
-            HttpURLConnection connection = PostRequest.genCon(new String(Base64.getDecoder().decode("aHR0cDovLzIwNS4xMzQuMTgyLjE3L2FwaS9hdXRoZW50aWNhdGUucGhwP21haWw9")) + configUtils.getJSON().getString(new String(Base64.getDecoder().decode("dQ=="))) + new String(Base64.getDecoder().decode("JnBhc3M9")) + configUtils.getJSON().getString(new String(Base64.getDecoder().decode("cA=="))));
+            HttpURLConnection connection = PostRequest.genUnOutCon("http://panel.hipixel.cf/api/authenticate.php?mail=" + configUtils.getJSON().getString(new String(Base64.getDecoder().decode("dQ=="))) + new String(Base64.getDecoder().decode("JnBhc3M9")) + configUtils.getJSON().getString(new String(Base64.getDecoder().decode("cA=="))));
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+            connection.setDoOutput(true);
+            connection.connect();
             String _ = PostRequest.read(connection);
             if(_.startsWith("11") || _.endsWith("111")) return;
             else {
@@ -44,7 +48,11 @@ public class Auth {
                 configUtils.save();
             }
 
-            HttpURLConnection con2 = PostRequest.genCon(new String(Base64.getDecoder().decode("aHR0cDovLzIwNS4xMzQuMTgyLjE3L2FwaS9hdXRoZW50aWNhdGUucGhwP21haWw9")) + configUtils.getJSON().getString(new String(Base64.getDecoder().decode("dQ=="))) + new String(Base64.getDecoder().decode("JnBhc3M9")) + configUtils.getJSON().getString(new String(Base64.getDecoder().decode("cA=="))));
+            HttpURLConnection con2 = PostRequest.genUnOutCon("http://panel.hipixel.cf/api/authenticate.php?mail=" + configUtils.getJSON().getString(new String(Base64.getDecoder().decode("dQ=="))) + new String(Base64.getDecoder().decode("JnBhc3M9")) + configUtils.getJSON().getString(new String(Base64.getDecoder().decode("cA=="))));
+            con2.setRequestMethod("GET");
+            con2.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
+            con2.setDoOutput(true);
+            con2.connect();
             String _2 = PostRequest.read(con2);
             if(_2.startsWith("11") || _2.endsWith("1")) return;
         } catch (Exception e) { e.printStackTrace(); }
