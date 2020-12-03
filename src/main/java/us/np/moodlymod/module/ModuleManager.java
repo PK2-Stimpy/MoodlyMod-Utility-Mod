@@ -9,10 +9,7 @@ import us.np.moodlymod.module.modules.misc.DiscordRPCModule;
 import us.np.moodlymod.module.modules.misc.NoVoidModule;
 import us.np.moodlymod.module.modules.movement.ElytraFlyModule;
 import us.np.moodlymod.module.modules.movement.SprintModule;
-import us.np.moodlymod.module.modules.render.FullbrightModule;
-import us.np.moodlymod.module.modules.render.MobOwnerModule;
-import us.np.moodlymod.module.modules.render.PortalESPModule;
-import us.np.moodlymod.module.modules.render.VoidESPModule;
+import us.np.moodlymod.module.modules.render.*;
 import us.np.moodlymod.module.modules.ui.ClickGuiModule;
 import us.np.moodlymod.module.modules.ui.HUDModule;
 import us.np.moodlymod.module.modules.world.DonkeyLoggerModule;
@@ -37,6 +34,7 @@ public class ModuleManager {
         modules.add(new SprintModule());
         /* Render */
         /* modules.add(new XRay()); */
+        modules.add(new BreakESPModule());
         modules.add(new FullbrightModule());
         modules.add(new MobOwnerModule());
         modules.add(new PortalESPModule());
