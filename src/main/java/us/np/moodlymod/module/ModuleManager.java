@@ -3,10 +3,7 @@ package us.np.moodlymod.module;
 import us.np.moodlymod.module.modules.combat.AutoCrystalModule;
 import us.np.moodlymod.module.modules.combat.AutoTotemModule;
 import us.np.moodlymod.module.modules.exploit.AntiHungerModule;
-import us.np.moodlymod.module.modules.misc.AntiAFKModule;
-import us.np.moodlymod.module.modules.misc.AutoRacismModule;
-import us.np.moodlymod.module.modules.misc.DiscordRPCModule;
-import us.np.moodlymod.module.modules.misc.NoVoidModule;
+import us.np.moodlymod.module.modules.misc.*;
 import us.np.moodlymod.module.modules.movement.ElytraFlyModule;
 import us.np.moodlymod.module.modules.movement.SprintModule;
 import us.np.moodlymod.module.modules.render.*;
@@ -40,8 +37,11 @@ public class ModuleManager {
         modules.add(new PortalESPModule());
         modules.add(new VoidESPModule());
         /* Misc */
+        modules.add(new AnarchyColoredChatModule());
         modules.add(new AntiAFKModule());
         modules.add(new AutoRacismModule());
+        modules.add(new ChatModule());
+        modules.add(new ChatSuffixModule());
         modules.add(new DiscordRPCModule());
         modules.add(new NoVoidModule());
         /* World */
@@ -61,6 +61,12 @@ public class ModuleManager {
             if(module.getModuleType() == moduleType)
                 modules.add(module);
         return modules;
+    }
+    public Module getModuleByClass(Class<? extends Module> moduleClass) {
+        for(Module module : getModules())
+            if(module.getClass() == moduleClass)
+                return module;
+        return null;
     }
 
 

@@ -60,4 +60,12 @@ public abstract class MixinEntityPlayerSP {
         MoodlyMod.EVENT_BUS.post(playerPushOutOfBlocksEvent);
         if(playerPushOutOfBlocksEvent.isCancelled()) callbackInfo.setReturnValue(false);
     }
+
+    @Inject(method = "sendChatMessage", at = @At("HEAD"), cancellable = true)
+    public void onMessageEvent(String message, CallbackInfo callbackInfo) {
+        PlayerChatEvent playerChatEvent = new PlayerChatEvent(message);
+        MoodlyMod.EVENT_BUS.post(playerChatEvent);
+        if(playerChatEvent.isCancelled())
+            callbackInfo.cancel();
+    }
 }

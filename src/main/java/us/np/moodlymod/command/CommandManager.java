@@ -1,7 +1,9 @@
 package us.np.moodlymod.command;
 
 import org.apache.commons.lang3.ArrayUtils;
+import us.np.moodlymod.command.commands.CommandChatSuffix;
 import us.np.moodlymod.command.commands.CommandFriend;
+import us.np.moodlymod.command.commands.CommandHelp;
 import us.np.moodlymod.command.commands.CommandPrefix;
 import us.np.moodlymod.util.ConfigUtils;
 
@@ -21,8 +23,10 @@ public class CommandManager {
         else prefix = (String)object;
 
         commands = new ArrayList<Command>();
+        commands.add(new CommandHelp());
         commands.add(new CommandPrefix());
         commands.add(new CommandFriend());
+        commands.add(new CommandChatSuffix());
     }
 
     public Command get(String alias) {
