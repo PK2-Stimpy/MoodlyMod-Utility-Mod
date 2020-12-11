@@ -4,11 +4,14 @@ import javafx.geometry.BoundingBox;
 import me.zero.alpine.fork.listener.EventHandler;
 import me.zero.alpine.fork.listener.Listener;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import org.lwjgl.opengl.GL11;
 import us.np.moodlymod.Wrapper;
 import us.np.moodlymod.event.custom.render.RenderEvent;
 import us.np.moodlymod.module.Module;
@@ -58,7 +61,6 @@ public class PortalESPModule extends Module {
         if (PortalESPModule.mc.world == null) return;
 
         for (final BlockPos pos : this.blockPosArrayList) {
-            // RenderUtils.drawBoxESP(pos, new Color(204, 0, 153, 255), false, new Color(204, 0, 153, 255), this.lineWidth.getValue().floatValue(), this.outline.getValue(), this.box.getValue(), this.boxAlpha.getValue().intValue(), false);
             AxisAlignedBB bb = new AxisAlignedBB(
                     pos.getX(),
                     pos.getY(),
@@ -67,9 +69,25 @@ public class PortalESPModule extends Module {
                     pos.getY()+1,
                     pos.getZ()+1
             );
-            RenderUtils.drawBoundingBox(bb, lineWidth.getValue().floatValue(),204, 0, 153, 255);
-            if(box.getValue()) RenderUtils.drawFilledBox(bb, (boxAlpha.getValue().intValue() << 24) | (204 << 16) | (0 << 8) | 153);
-            Wrapper.getMC().player.sendMessage(new TextComponentString("block add"));
+            GlStateManager.pushMatrix();
+            GlStateManager.enableBlend();
+            GlStateManager.disableDepth();
+            GlStateManager.tryBlendFuncSeparate(770, 771, 0, 1);
+            GlStateManager.disableTexture2D();
+            GlStateManager.depthMask(false);
+            GL11.glEnable(GL11.GL_LINE_SMOOTH);
+            GL11.glHint(GL11.GL_LINE_SMOOTH_HINT, GL11.GL_NICEST);
+            GL11.glLineWidth(1.5f);
+
+            RenderGlobal.drawBoundingBox(bb.minX, bb.minY, bb.minZ, bb.maxX, bb.maxY, bb.maxZ, 255, 20, 30, 0.50f);
+            if(box.getValue()) RenderGlobal.renderFilledBox(bb.minX, bb.minY, bb.minZ, bb.maxX, bb.maxY, bb.maxZ, 255, 20, 30, 0.22f);
+
+            GL11.glDisable(GL11.GL_LINE_SMOOTH);
+            GlStateManager.depthMask(true);
+            GlStateManager.enableDepth();
+            GlStateManager.enableTexture2D();
+            GlStateManager.disableBlend();
+            GlStateManager.popMatrix();
         }
     });
 
@@ -83,7 +101,6 @@ public class PortalESPModule extends Module {
                     final Block block = PortalESPModule.mc.world.getBlockState(pos).getBlock();
                     if (block == Blocks.PORTAL) {
                         this.blockPosArrayList.add(pos);
-                        Wrapper.getMC().player.sendMessage(new TextComponentString("block add"));
                     }
                 }
     }

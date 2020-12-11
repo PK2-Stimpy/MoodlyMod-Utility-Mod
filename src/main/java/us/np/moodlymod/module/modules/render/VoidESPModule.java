@@ -94,4 +94,9 @@ public class VoidESPModule extends Module {
             }
         });
     });
+
+    @Override
+    public String getMeta() {
+        return void_radius.getValue().toString();
+    }
 }

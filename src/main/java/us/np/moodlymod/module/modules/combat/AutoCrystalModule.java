@@ -55,6 +55,7 @@ import java.util.stream.Collectors;
 /**
  * @apiNote Checks: 'NetworkPacketEvent', 'PlayerMotionUpdateEvent', 'EntityRemovedEvent'
  * @apiNote 'TickEvent.PlayerTickEvent', 'RenderEvent'.
+ * TODO: Fix break.
  *
  * */
 public class AutoCrystalModule extends Module {
@@ -503,5 +504,10 @@ public class AutoCrystalModule extends Module {
         if (pauseIfHittingBlock.getValue() && mc.playerController.isHittingBlock && mc.player.getHeldItemMainhand().getItem() instanceof ItemTool)
             return true;
         return false;
+    }
+
+    @Override
+    public String getMeta() {
+        return _lastTarget;
     }
 }

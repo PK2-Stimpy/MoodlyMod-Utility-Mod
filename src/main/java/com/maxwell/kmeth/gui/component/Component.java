@@ -1,6 +1,16 @@
 package com.maxwell.kmeth.gui.component;
 
+import us.np.moodlymod.module.option.Option;
+
 public class Component {
+	public Option option;
+	public Component(Option option) {
+		this.option = option;
+	}
+	public Component() {
+		this.option = null;
+	}
+
 	public void renderComponent() {
 
 	}
@@ -20,6 +30,8 @@ public class Component {
 	public void setOffset(int newOff) {
 
 	}
+
+	public int getOffset() { return 0; }
 
 	public int getHeight() {
 		return 0;

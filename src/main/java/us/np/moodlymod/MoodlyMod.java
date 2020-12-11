@@ -31,7 +31,7 @@ public class MoodlyMod {
 
     public static final String MODID = "moodlymod";
     public static final String NAME = "MoodlyMod";
-    public static final String VERSION = "0.2";
+    public static final String VERSION = "0.3";
 
     public static ModuleManager moduleManager;
     public static CommandManager commandManager;

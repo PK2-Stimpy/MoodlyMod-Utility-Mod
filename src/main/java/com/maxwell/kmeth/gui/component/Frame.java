@@ -1,6 +1,7 @@
 package com.maxwell.kmeth.gui.component;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.lwjgl.opengl.GL11;
 
@@ -23,6 +24,7 @@ public class Frame {
 	public boolean isDragging;
 	public int dragX;
 	public int dragY;
+	public int optionY = 0;
 
 	public Frame(ModuleType category) {
 		this.components = new ArrayList<Component>();
@@ -42,15 +44,32 @@ public class Frame {
 		}
 	}
 
+	boolean first = true;
+	public void startRender(int offset) {
+		optionY = offset+12;
+		if(first) {
+			lastButtonY = optionY;
+			first = false;
+		}
+	}
+	public void endRender() {
+
+	}
+
+	public int lastButtonY = 0;
+
 	public void renderFrame() {
+		refresh();
 		Gui.drawRect(this.x - 3, this.y, this.x + this.width + 3, this.y + this.barHeight, 0xFFab4949);
 		GL11.glPushMatrix();
 		GL11.glScalef(0.5f, 0.5f, 0.5f);
 		Wrapper.getMinecraft().fontRenderer.drawStringWithShadow(this.category.toString(), ((this.x + 2) * 2 + 5), (this.y + 2) * 2 + 5, -1);
 		Wrapper.getMinecraft().fontRenderer.drawStringWithShadow(this.open ? "-" : "+", ((this.x + this.width - 10) * 2 + 5), (this.y + 2) * 2 + 5, -1);
 		GL11.glPopMatrix();
+		first = true;
 		if (this.open && !this.components.isEmpty()) {
 			for (Component component : this.components) {
+				startRender(component.getOffset());
 				component.renderComponent();
 			}
 		}

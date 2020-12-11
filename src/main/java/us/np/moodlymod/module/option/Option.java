@@ -1,7 +1,10 @@
 package us.np.moodlymod.module.option;
 
+import java.util.function.Predicate;
+
 public class Option<T> {
     public T value;
+    private Predicate<T> visibleCheck = null;
     private String name;
     private T defaultValue;
     private OptionBetterMode mode = null;
@@ -28,4 +31,11 @@ public class Option<T> {
     public T getDefaultValue() { return defaultValue; }
     public T getValue() { return value; }
     public void setValue(T value) { this.value = value; }
+
+    public Option<T> visibleWhen(final Predicate<T> predicate) {
+        this.visibleCheck = predicate;
+        return this;
+    }
+
+    public boolean isVisible() { return this.visibleCheck == null || this.visibleCheck.test(this.value); }
 }

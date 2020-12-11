@@ -31,4 +31,9 @@ public class NoVoidModule extends Module {
             NoVoidModule.mc.player.setVelocity(0.0, 0.0, 0.0);
         }
     });
+
+    @Override
+    public String getMeta() {
+        return height.getValue().toString();
+    }
 }

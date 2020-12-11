@@ -16,6 +16,7 @@ public class CustomEvent extends Cancellable {
     }
 
     public Era getEra() { return era; }
+    public void setEra(Era era) { this.era = era; }
     public float getPartialTicks() { return partialTicks; }
 
     public enum Era

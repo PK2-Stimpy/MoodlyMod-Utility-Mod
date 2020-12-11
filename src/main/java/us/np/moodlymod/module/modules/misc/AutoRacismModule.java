@@ -42,4 +42,9 @@ public class AutoRacismModule extends Module {
         thread.stop();
         if(mc.player != null) mc.player.connection.sendPacket(new CPacketChatMessage("I still hate black people ₿ " + MoodlyMod.NAME));
     }
+
+    @Override
+    public String getMeta() {
+        return delay.getValue().toString();
+    }
 }

@@ -12,6 +12,11 @@
     "MixinWorld",
     "MixinEntity",
     "MixinEntityLivingBase",
-    "MixinEntityPlayer"
+    "MixinEntityPlayer",
+    "MixinRenderLivingBase",
+    "MixinRenderer",
+    "MixinModelPlayer",
+    "MixinRenderPlayer",
+    "MixinRenderEnderCrystal"
   ]
 }

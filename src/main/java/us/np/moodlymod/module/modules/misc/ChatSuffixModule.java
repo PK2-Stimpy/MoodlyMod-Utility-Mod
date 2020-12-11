@@ -22,4 +22,7 @@ public class ChatSuffixModule extends Module {
     }
 
     public String getSuffix() { return CommandChatSuffix.INSTANCE.getSuffix(); }
+
+    @Override
+    public String getMeta() { return getSuffix(); }
 }

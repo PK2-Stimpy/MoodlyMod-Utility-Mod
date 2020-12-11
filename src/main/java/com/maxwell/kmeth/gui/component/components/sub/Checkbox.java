@@ -19,6 +19,7 @@ public class Checkbox extends Component {
 	private int y;
 
 	public Checkbox(OptionBoolean option, Button button, int offset) {
+		super(option);
 		this.option = option;
 		this.parent = button;
 		this.x = button.getParent().getX() + button.getParent().getWidth();
@@ -27,8 +28,17 @@ public class Checkbox extends Component {
 	}
 
 	@Override
+	public int getOffset() {
+		return offset;
+	}
+
+	@Override
 	public void renderComponent() {
-		if(!option.shouldShow()) return;
+		if(!option.isVisible())
+			return;
+		this.offset = parent.getParent().optionY;
+		parent.getParent().optionY+=12;
+
 		Gui.drawRect(this.parent.getParent().getX() + 2, this.parent.getParent().getY() + this.offset, this.parent.getParent().getX() + this.parent.getParent().getWidth() * 1, this.parent.getParent().getY() + this.offset + 12, this.hovered ? -14540254 : -15658735);
 		Gui.drawRect(this.parent.getParent().getX(), this.parent.getParent().getY() + this.offset, this.parent.getParent().getX() + 2, this.parent.getParent().getY() + this.offset + 12, -15658735);
 		GL11.glPushMatrix();
@@ -48,6 +58,8 @@ public class Checkbox extends Component {
 
 	@Override
 	public void updateComponent(int mouseX, int mouseY) {
+		if(!option.isVisible())
+			return;
 		this.hovered = this.isMouseOnButton(mouseX, mouseY);
 		this.y = this.parent.getParent().getY() + this.offset;
 		this.x = this.parent.getParent().getX();
@@ -55,6 +67,8 @@ public class Checkbox extends Component {
 
 	@Override
 	public void mouseClicked(int mouseX, int mouseY, int button) {
+		if(!option.isVisible())
+			return;
 		if (this.isMouseOnButton(mouseX, mouseY) && button == 0 && this.parent.isOpen()) {
 			this.option.setValue(!option.getValue());
 			//this.parent.getMod().save();

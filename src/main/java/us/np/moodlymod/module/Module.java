@@ -151,4 +151,5 @@ public class Module implements Listenable {
     public Color getColor() {return color;}
     public ArrayList<Option> getOptions() { return options; }
     public ModuleType getModuleType() {return moduleType;}
+    public String getMeta() { return ""; }
 }

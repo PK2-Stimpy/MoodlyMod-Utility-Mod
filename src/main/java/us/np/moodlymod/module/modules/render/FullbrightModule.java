@@ -61,4 +61,9 @@ public class FullbrightModule extends Module {
                 event.cancel();
         }
     });
+
+    @Override
+    public String getMeta() {
+        return mode.getDisplayName();
+    }
 }

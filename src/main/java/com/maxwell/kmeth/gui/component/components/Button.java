@@ -35,6 +35,10 @@ public class Button extends Component {
 		this.offset = offset;
 		this.subcomponents = new ArrayList<Component>();
 		this.open = false;
+		updateOptionY();
+	}
+
+	public void updateOptionY() {
 		int optionY = offset + 12;
 		if (!mod.getOptions().isEmpty()) {
 			for (Option val : mod.getOptions()) {
@@ -76,6 +80,9 @@ public class Button extends Component {
 		}
 	}
 
+	ArrayList<Component> enabledComponents = new ArrayList<>();
+	ArrayList<Component> disabledComponents = new ArrayList<>();
+
 	@Override
 	public void renderComponent() {
 		Gui.drawRect(this.parent.getX(), this.parent.getY() + this.offset, this.parent.getX() + this.parent.getWidth(), this.parent.getY() + 12 + this.offset, this.hovered ? (this.mod.isEnabled() ? new Color(-14540254).darker().getRGB() : -14540254) : (this.mod.isEnabled() ? new Color(14, 14, 14).getRGB() : -15658735));
@@ -86,18 +93,29 @@ public class Button extends Component {
 			Render.drawArrow(((this.parent.getX() + this.parent.getWidth() - 10) * 2), ((this.parent.getY() + this.offset + 2) * 2 + 5), this.open, this.mod.isEnabled() ? 0xFFab4949 : this.hovered ? -11184811 : -12303292);
 		}
 		GL11.glPopMatrix();
-		if (this.open && !this.subcomponents.isEmpty()) {
-			for (Component component : this.subcomponents) {
+		if (this.open && !this.enabledComponents.isEmpty()) {
+			for (Component component : this.enabledComponents) {
 				component.renderComponent();
 			}
-			Gui.drawRect(this.parent.getX() + 2, this.parent.getY() + this.offset + 12, this.parent.getX() + 3, this.parent.getY() + this.offset + (this.subcomponents.size() + 1) * 12, 0xFFab4949);
+
+			Gui.drawRect(this.parent.getX() + 2, this.parent.getY() + this.offset + 12, this.parent.getX() + 3, this.parent.getY() + this.offset + (enabledComponents.size() + 1) * 12, 0xFFab4949);
 		}
 	}
 
 	@Override
 	public int getHeight() {
+		enabledComponents = new ArrayList<>();
+		disabledComponents = new ArrayList<>();
+		for (Component component : this.subcomponents) {
+			if (component.option != null && !component.option.isVisible()) {
+				disabledComponents.add(component);
+				continue;
+			}
+			enabledComponents.add(component);
+		}
+
 		if (this.open) {
-			return 12 * (this.subcomponents.size() + 1);
+			return 12 * (this.enabledComponents.size() + 1);
 		}
 		return 12;
 	}
@@ -121,14 +139,14 @@ public class Button extends Component {
 			this.open = !this.open;
 			this.parent.refresh();
 		}
-		for (Component component : this.subcomponents) {
+		for (Component component : this.enabledComponents) {
 			component.mouseClicked(mouseX, mouseY, button);
 		}
 	}
 
 	@Override
 	public void keyTyped(char typedChar, int key) {
-		for (Component component : this.subcomponents) {
+		for (Component component : this.enabledComponents) {
 			component.keyTyped(typedChar, key);
 		}
 	}

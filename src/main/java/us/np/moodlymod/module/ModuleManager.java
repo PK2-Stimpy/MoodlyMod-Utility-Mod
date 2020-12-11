@@ -2,14 +2,16 @@ package us.np.moodlymod.module;
 
 import us.np.moodlymod.module.modules.combat.AutoCrystalModule;
 import us.np.moodlymod.module.modules.combat.AutoTotemModule;
+import us.np.moodlymod.module.modules.combat.WorkingAutoTotemModule;
 import us.np.moodlymod.module.modules.exploit.AntiHungerModule;
+import us.np.moodlymod.module.modules.exploit.PacketCancellerModule;
 import us.np.moodlymod.module.modules.misc.*;
 import us.np.moodlymod.module.modules.movement.ElytraFlyModule;
 import us.np.moodlymod.module.modules.movement.SprintModule;
 import us.np.moodlymod.module.modules.render.*;
 import us.np.moodlymod.module.modules.ui.ClickGuiModule;
 import us.np.moodlymod.module.modules.ui.HUDModule;
-import us.np.moodlymod.module.modules.world.DonkeyLoggerModule;
+import us.np.moodlymod.module.modules.world.EntityLoggerModule;
 
 import java.util.ArrayList;
 
@@ -22,16 +24,22 @@ public class ModuleManager {
 
     public void setModules() {
         /* Combat */
+        modules.add(new WorkingAutoTotemModule());
+        /*
         modules.add(new AutoTotemModule());
         modules.add(new AutoCrystalModule());
+        */
+        
         /* Exploit */
         modules.add(new AntiHungerModule());
+        modules.add(new PacketCancellerModule());
         /* Movement */
         modules.add(new ElytraFlyModule());
         modules.add(new SprintModule());
         /* Render */
         /* modules.add(new XRay()); */
         modules.add(new BreakESPModule());
+        modules.add(new ChamsModule());
         modules.add(new FullbrightModule());
         modules.add(new MobOwnerModule());
         modules.add(new PortalESPModule());
@@ -45,7 +53,7 @@ public class ModuleManager {
         modules.add(new DiscordRPCModule());
         modules.add(new NoVoidModule());
         /* World */
-        modules.add(new DonkeyLoggerModule());
+        modules.add(new EntityLoggerModule());
         /* UI */
         // modules.add(new TestBetterModeModule()); /* Just for testing. */
         modules.add(new ClickGuiModule());

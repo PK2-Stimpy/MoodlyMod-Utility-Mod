@@ -21,6 +21,7 @@ public class AnarchyColoredChatModule extends Module {
     public void onEnable() {
         super.onEnable();
         ChatModule chatModule = (ChatModule) MoodlyMod.moduleManager.getModuleByClass(ChatModule.class);
+        if(chatModule == null) return;
         if(!chatModule.isEnabled())
             chatModule.toggle(true);
     }
@@ -33,5 +34,10 @@ public class AnarchyColoredChatModule extends Module {
             default: break;
         }
         return "";
+    }
+
+    @Override
+    public String getMeta() {
+        return color.getDisplayName();
     }
 }

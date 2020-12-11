@@ -39,4 +39,9 @@ public class AntiAFKModule extends Module {
         else if(mode.getMode() == 1)
             mc.player.connection.sendPacket(new CPacketChatMessage("/help")); /* L2X9 */
     });
+
+    @Override
+    public String getMeta() {
+        return mode.getDisplayName();
+    }
 }

@@ -13,6 +13,7 @@ import us.np.moodlymod.module.Module;
 import us.np.moodlymod.module.ModuleType;
 import us.np.moodlymod.module.option.Option;
 import us.np.moodlymod.module.option.OptionBoolean;
+import us.np.moodlymod.util.ChatColor;
 import us.np.moodlymod.util.ColorUtils;
 import us.np.moodlymod.util.RenderUtils;
 
@@ -79,8 +80,13 @@ public class HUDModule extends Module {
             int xPos = 4;
             for(Module module : MoodlyMod.moduleManager.getModules()) {
                 if(!module.isEnabled() || !module.showInArray) continue;
-                RenderUtils.drawStringWithRect(module.displayName, xPos, yPos, module.getColor().getRGB(),
-                        colorRect, colorRect2);
+                RenderUtils.drawStringWithRect(
+                        module.displayName + ((module.getMeta().contentEquals("") ? "" : (" " + ChatColor.parse("&", "&7" + module.getMeta())))),
+                        xPos,
+                        yPos,
+                        module.getColor().getRGB(),
+                        colorRect,
+                        colorRect2);
                 yPos += 12;
             }
         }

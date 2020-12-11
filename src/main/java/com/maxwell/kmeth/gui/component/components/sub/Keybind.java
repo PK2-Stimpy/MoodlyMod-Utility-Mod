@@ -18,6 +18,7 @@ public class Keybind extends Component {
 	private int y;
 
 	public Keybind(Button button, int offset) {
+		super(button.option);
 		this.parent = button;
 		this.x = button.getParent().getX() + button.getParent().getWidth();
 		this.y = button.getParent().getY() + button.getOffset();
@@ -25,7 +26,15 @@ public class Keybind extends Component {
 	}
 
 	@Override
+	public int getOffset() {
+		return offset;
+	}
+
+	@Override
 	public void renderComponent() {
+		this.offset = parent.getParent().optionY;
+		parent.getParent().optionY+=12;
+
 		Gui.drawRect(this.parent.getParent().getX() + 2, this.parent.getParent().getY() + this.offset, this.parent.getParent().getX() + this.parent.getParent().getWidth() * 1, this.parent.getParent().getY() + this.offset + 12, this.hovered ? -14540254 : -15658735);
 		Gui.drawRect(this.parent.getParent().getX(), this.parent.getParent().getY() + this.offset, this.parent.getParent().getX() + 2, this.parent.getParent().getY() + this.offset + 12, -15658735);
 		GL11.glPushMatrix();

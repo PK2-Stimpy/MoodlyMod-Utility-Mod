@@ -20,6 +20,7 @@ public class Slider extends Component {
 	private int y;
 
 	public Slider(OptionDouble value, Button button, int offset) {
+		super(value);
 		this.value = value;
 		this.parent = button;
 		this.x = button.getParent().getX() + button.getParent().getWidth();
@@ -28,8 +29,18 @@ public class Slider extends Component {
 	}
 
 	@Override
+	public int getOffset() {
+		return offset;
+	}
+
+	@Override
 	public void renderComponent() {
-		if(!value.shouldShow()) return;
+		if(!option.isVisible())
+			return;
+
+		this.offset = parent.getParent().optionY;
+		parent.getParent().optionY+=12;
+
 		Gui.drawRect(this.parent.getParent().getX() + 2, this.parent.getParent().getY() + this.offset, this.parent.getParent().getX() + this.parent.getParent().getWidth(), this.parent.getParent().getY() + this.offset + 12, this.hovered ? -14540254 : -15658735);
 		int drag = (int) (this.value.getValue() / this.value.getMax() * this.parent.getParent().getWidth());
 		Gui.drawRect(this.parent.getParent().getX() + 2, this.parent.getParent().getY() + this.offset, this.parent.getParent().getX() + drag, this.parent.getParent().getY() + this.offset + 12, this.hovered ? -11184811 : -12303292);
@@ -47,6 +58,8 @@ public class Slider extends Component {
 
 	@Override
 	public void updateComponent(int mouseX, int mouseY) {
+		if(!option.isVisible())
+			return;
 		this.hovered = (this.isMouseOnButtonD(mouseX, mouseY) || this.isMouseOnButtonI(mouseX, mouseY));
 		this.y = this.parent.getParent().getY() + this.offset;
 		this.x = this.parent.getParent().getX();
@@ -59,6 +72,8 @@ public class Slider extends Component {
 
 	@Override
 	public void mouseClicked(int mouseX, int mouseY, int button) {
+		if(!option.isVisible())
+			return;
 		if (this.isMouseOnButtonD(mouseX, mouseY) && button == 0 && this.parent.isOpen()) {
 			OptionDouble numberValue = this.value;
 			double value = numberValue.getValue() - 0.1;

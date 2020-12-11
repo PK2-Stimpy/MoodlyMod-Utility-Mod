@@ -6,6 +6,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.CPacketEntityAction;
 import net.minecraft.network.play.client.CPacketPlayer;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -94,6 +96,52 @@ public class PlayerUtil {
         catch (Exception e) {
             return null;
         }
+    }
+
+    public static int getItemSlot(Item input)
+    {
+        if (Wrapper.getMC().player == null)
+            return 0;
+
+        for (int i = 0; i < Wrapper.getMC().player.inventoryContainer.getInventory().size(); ++i)
+        {
+            if (i == 0 || i == 5 || i == 6 || i == 7 || i == 8)
+                continue;
+
+            ItemStack s = Wrapper.getMC().player.inventoryContainer.getInventory().get(i);
+
+            if (s.isEmpty())
+                continue;
+
+            if (s.getItem() == input)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int getRecursiveItemSlot(Item input)
+    {
+        if (Wrapper.getMC().player == null)
+            return 0;
+
+        for (int i = Wrapper.getMC().player.inventoryContainer.getInventory().size() - 1; i > 0; --i)
+        {
+            if (i == 0 || i == 5 || i == 6 || i == 7 || i == 8)
+                continue;
+
+            ItemStack s = Wrapper.getMC().player.inventoryContainer.getInventory().get(i);
+
+            if (s.isEmpty())
+                continue;
+
+            if (s.getItem() == input)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public static boolean canSeeBlock(BlockPos pos)

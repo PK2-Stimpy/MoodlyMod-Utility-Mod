@@ -225,4 +225,9 @@ public class ElytraFlyModule extends Module {
                 event.cancel();
             } else if(packet instanceof CPacketPlayer.Rotation) event.cancel();
     });
+
+    @Override
+    public String getMeta() {
+        return mode.getDisplayName();
+    }
 }
