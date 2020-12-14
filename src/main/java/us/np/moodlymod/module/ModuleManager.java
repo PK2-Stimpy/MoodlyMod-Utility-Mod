@@ -1,9 +1,6 @@
 package us.np.moodlymod.module;
 
-import us.np.moodlymod.module.modules.combat.AutoCrystalModule;
-import us.np.moodlymod.module.modules.combat.AutoTotemModule;
-import us.np.moodlymod.module.modules.combat.VelocityModule;
-import us.np.moodlymod.module.modules.combat.WorkingAutoTotemModule;
+import us.np.moodlymod.module.modules.combat.*;
 import us.np.moodlymod.module.modules.exploit.AntiHungerModule;
 import us.np.moodlymod.module.modules.exploit.PacketCancellerModule;
 import us.np.moodlymod.module.modules.misc.*;
@@ -25,7 +22,9 @@ public class ModuleManager {
 
     public void setModules() {
         /* Combat */
+        modules.add(new AimbotModule());
         modules.add(new WorkingAutoTotemModule());
+        modules.add(new KillAuraModule());
         modules.add(new VelocityModule());
         /*
         modules.add(new AutoTotemModule());
@@ -62,6 +61,11 @@ public class ModuleManager {
         modules.add(new ClickGuiModule());
         modules.add(new HUDModule());
         /* Always Enabled */
+
+        /* OnEnable event instance. */
+        for(Module module : modules)
+            if(module.isEnabled())
+                module.onEnable();
     }
     public ArrayList<Module> getModules() {
         return modules;

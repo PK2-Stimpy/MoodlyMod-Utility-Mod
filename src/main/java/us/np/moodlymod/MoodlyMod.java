@@ -18,6 +18,7 @@ import org.lwjgl.opengl.Display;
 import us.np.moodlymod.command.CommandManager;
 import us.np.moodlymod.event.CEventProcessor;
 import us.np.moodlymod.event.EventProcessor;
+import us.np.moodlymod.managers.TickRateManager;
 import us.np.moodlymod.module.Module;
 import us.np.moodlymod.module.ModuleManager;
 import us.np.moodlymod.util.FriendsUtil;
@@ -37,6 +38,7 @@ public class MoodlyMod {
     public static ModuleManager moduleManager;
     public static CommandManager commandManager;
     public static FriendsUtil friendsUtil;
+    public static TickRateManager tickRateManager;
 
     public static Logger logger;
     public static GUI clickGui;
@@ -59,6 +61,8 @@ public class MoodlyMod {
     @EventHandler
     public void init(FMLInitializationEvent event) {
         logger.info("Mod initlialised :" + NAME);
+
+        tickRateManager = new TickRateManager();
 
         moduleManager = new ModuleManager();
         moduleManager.setModules();

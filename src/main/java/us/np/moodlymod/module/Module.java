@@ -123,8 +123,6 @@ public class Module implements Listenable {
                 }
             }
         }
-
-        if(enabled) onEnable();
     }
 
     public void setEnabled(boolean enabled) {
