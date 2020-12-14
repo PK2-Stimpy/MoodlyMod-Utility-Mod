@@ -58,6 +58,7 @@ public class MoodlyMod {
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+        /* M12LK3M1KL31M2KL312KL3 ML */
         logger.info("Mod initlialised :" + NAME);
 
         moduleManager = new ModuleManager();
