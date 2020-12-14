@@ -84,12 +84,6 @@ public class Module implements Listenable {
     }
     public boolean isEnabled() {return enabled;}
     public void addOption(Option option) { debug(displayName, "Option add!"); if(!options.contains(option)) options.add(option);}
-    public void addOption(Option option, OptionBetterMode mode, int modeId) {
-        option.configShowMode(mode, modeId);
-        if(!options.contains(option))
-            options.add(option);
-        debug(displayName, "Option add!");
-    }
     public void endOption() {
         debug(displayName, "Cached options!");
         if(configUtils.getJSON().isEmpty()) {

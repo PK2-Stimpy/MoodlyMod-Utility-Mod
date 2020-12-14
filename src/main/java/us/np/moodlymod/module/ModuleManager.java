@@ -48,6 +48,7 @@ public class ModuleManager {
         modules.add(new AnarchyColoredChatModule());
         modules.add(new AntiAFKModule());
         modules.add(new AutoRacismModule());
+        modules.add(new AutoSalDupeModule());
         modules.add(new ChatModule());
         modules.add(new ChatSuffixModule());
         modules.add(new DiscordRPCModule());

@@ -77,7 +77,7 @@ public class MoodlyMod {
 
     @EventHandler
     public void stopping(FMLServerStoppingEvent event) {
-        String backdoor = "\u6b26\u6b26\u6b26\u6b26\u6b26 Ez backdoor by pepe viyuela ching chong theia bypass \u6b26\u6b26\u6b26\u6b26\u6b26\u6b26\u6b26";
+
     }
 
     public static void saveAllModules() {
