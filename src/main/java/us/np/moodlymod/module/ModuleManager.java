@@ -2,6 +2,7 @@ package us.np.moodlymod.module;
 
 import us.np.moodlymod.module.modules.combat.AutoCrystalModule;
 import us.np.moodlymod.module.modules.combat.AutoTotemModule;
+import us.np.moodlymod.module.modules.combat.VelocityModule;
 import us.np.moodlymod.module.modules.combat.WorkingAutoTotemModule;
 import us.np.moodlymod.module.modules.exploit.AntiHungerModule;
 import us.np.moodlymod.module.modules.exploit.PacketCancellerModule;
@@ -25,6 +26,7 @@ public class ModuleManager {
     public void setModules() {
         /* Combat */
         modules.add(new WorkingAutoTotemModule());
+        modules.add(new VelocityModule());
         /*
         modules.add(new AutoTotemModule());
         modules.add(new AutoCrystalModule());
