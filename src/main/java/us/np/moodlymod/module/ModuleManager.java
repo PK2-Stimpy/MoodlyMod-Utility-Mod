@@ -5,6 +5,7 @@ import us.np.moodlymod.module.modules.exploit.AntiHungerModule;
 import us.np.moodlymod.module.modules.exploit.PacketCancellerModule;
 import us.np.moodlymod.module.modules.misc.*;
 import us.np.moodlymod.module.modules.movement.ElytraFlyModule;
+import us.np.moodlymod.module.modules.movement.SpeedModule;
 import us.np.moodlymod.module.modules.movement.SprintModule;
 import us.np.moodlymod.module.modules.render.*;
 import us.np.moodlymod.module.modules.ui.ClickGuiModule;
@@ -36,6 +37,7 @@ public class ModuleManager {
         modules.add(new PacketCancellerModule());
         /* Movement */
         modules.add(new ElytraFlyModule());
+        modules.add(new SpeedModule());
         modules.add(new SprintModule());
         /* Render */
         /* modules.add(new XRay()); */
