@@ -7,5 +7,5 @@
       "mcversion": "${version_minecraft}",
       "url": "",
       "updateUrl": "",
-      "authorList": ["PK2_Stimpy", "NorkenBot"],
+      "authorList": ["PK2_Stimpy", "NorkenBot", "FaxHack"],
     }
