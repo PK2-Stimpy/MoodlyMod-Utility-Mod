@@ -42,8 +42,8 @@ public class SpeedModule extends Module {
             if (mode.getMode() == 0 && event.getPacket() instanceof CPacketPlayer && mc.player.onGround && !mc.player.movementInput.jump) {
                 if (!speedTick) {
                     final boolean isUnderBlocks = !mc.world.getCollisionBoxes(mc.player, mc.player.getEntityBoundingBox().offset(0, 1, 0)).isEmpty();
-                    ICPacketPlayer packet = (ICPacketPlayer)event.getPacket();
-                    packet.setY(packet.getY() + (isUnderBlocks ? 0.2 : 0.4));
+                    CPacketPlayer packet = (CPacketPlayer)event.getPacket();
+                    packet.y = packet.y + (isUnderBlocks?.2:.4);
                 }
                 mc.player.motionX *= (speedTick ? 2D : 0.701);
                 mc.player.motionZ *= (speedTick ? 2D : 0.701);
