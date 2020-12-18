@@ -2,10 +2,7 @@ package us.np.moodlymod.module.modules.render;
 //Made By FaxHack 16/12/20
 import us.np.moodlymod.module.Module;
 import us.np.moodlymod.module.ModuleType;
-import us.np.moodlymod.module.option.BetterMode;
-import us.np.moodlymod.module.option.OptionBetterMode;
-import us.np.moodlymod.module.option.OptionBoolean;
-import us.np.moodlymod.module.option.OptionDouble;
+import us.np.moodlymod.module.option.*;
 
 import java.awt.*;
 
@@ -29,5 +26,23 @@ public class HoleESPModule extends Module {
 
     public HoleESPModule() {
         super("NameTags", null, "NONE", Color.CYAN, ModuleType.RENDER);
+        addOption(mode);
+        addOption(offset);
+        addOption(range);
+        addOption(hide_own);
+        addOption(bedrock_enable);
+        addOption(rb);
+        addOption(gb);
+        addOption(bb);
+        addOption(ab);
+        addOption(obsidian_enable);
+        addOption(ro);
+        addOption(go);
+        addOption(bo);
+        addOption(ao);
+        addOption(line_a);
+
     }
+
+
 }

@@ -19,7 +19,15 @@ public class CityESPModule extends Module {
 
     public CityESPModule(){
         super("CityESP", null, "NONE", Color.CYAN, ModuleType.RENDER);
-
+        addOption(endcrystal_mode);
+        addOption(mode);
+        addOption(off_set);
+        addOption(range);
+        addOption(r);
+        addOption(g);
+        addOption(b);
+        addOption(a);
+        endOption();
 
     }
 }

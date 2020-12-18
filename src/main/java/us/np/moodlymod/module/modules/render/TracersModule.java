@@ -18,5 +18,10 @@ public class TracersModule extends Module {
 
     public TracersModule() {
         super("NameTags", null, "NONE", Color.CYAN, ModuleType.RENDER);
+        addOption(friends);
+        addOption(range);
+        addOption(width);
+        addOption(offset);
+        endOption();
     }
 }

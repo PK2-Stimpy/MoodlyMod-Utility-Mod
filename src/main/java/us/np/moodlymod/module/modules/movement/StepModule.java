@@ -9,12 +9,13 @@ import us.np.moodlymod.module.option.OptionBetterMode;
 import java.awt.*;
 
 public class StepModule extends Module {
-
     public static final OptionBetterMode mode = new OptionBetterMode("Mode", 0 , BetterMode.construct("Normal", "Reverse"));
 
 
 
-    public StepModule  (){
-        super("Speed", null, "NONE", Color.CYAN, ModuleType.MOVEMENT);
+    public StepModule(){
+        super("Step", null, "NONE", Color.CYAN, ModuleType.MOVEMENT);
+        addOption(mode);
+        endOption();
     }
 }
