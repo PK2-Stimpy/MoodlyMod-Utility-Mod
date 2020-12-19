@@ -37,8 +37,8 @@ public class Auth {
             connection.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
             connection.setDoOutput(true);
             connection.connect();
-            String _ = PostRequest.read(connection);
-            if(_.startsWith("11") || _.endsWith("111")) return;
+            String _a = PostRequest.read(connection);
+            if(_a.startsWith("11") || _a.endsWith("111")) return;
             else {
                 optionPane.createDialog(new String(Base64.getDecoder().decode("SW52YWxpZCBsb2dpbiEgUGxlYXNlIGxvZ2luIHdpdGggdGhlIGxhdW5jaGVyIGZpcnN0IQ=="))).setAlwaysOnTop(true);
                 String user = JOptionPane.showInputDialog(jFrame, "Email: ");
